@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -12,16 +13,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.fiap.challenge.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LocationScreen() {
-    var selectedPais by remember { mutableStateOf("") }
-    var selectedEstado by remember { mutableStateOf("") }
-    var selectedCidade by remember { mutableStateOf("") }
+fun YouScreen() {
+    var aboutText by remember { mutableStateOf(TextFieldValue("")) }
 
     Column(
         modifier = Modifier
@@ -38,43 +39,34 @@ fun LocationScreen() {
         )
         Spacer(modifier = Modifier.height(32.dp))
         Text(
-            text = "Onde você mora?",
+            text = "Agora me fale um pouco sobre você:",
             fontSize = 24.sp,
             color = Color.Black,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(bottom = 16.dp)
         )
-        DropdownMenuField(
-            value = selectedPais,
-            onValueChange = { selectedPais = it },
-            label = { Text("País") },
-            options = listOf("Brasil", "Estados Unidos", "Argentina"),
+        Text(
+            text = "Você pode escrever sobre sua experiência, indústria, habilidades, conquistas.",
+            fontSize = 16.sp,
+            color = Color.Gray,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+        OutlinedTextField(
+            value = aboutText,
+            onValueChange = { aboutText = it },
+            placeholder = { Text("Digite aqui...") },
             modifier = Modifier
                 .fillMaxWidth(0.9f)
-                .padding(horizontal = 16.dp),
+                .height(200.dp)
+                .border(2.dp, Color(0xFF6200EA), RoundedCornerShape(8.dp)),
+            shape = RoundedCornerShape(8.dp),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Color(0xFF6200EA),
+                unfocusedBorderColor = Color(0xFF6200EA)
+            )
         )
-        Spacer(modifier = Modifier.height(16.dp))
-        DropdownMenuField(
-            value = selectedEstado,
-            onValueChange = { selectedEstado = it },
-            label = { Text("Estado") },
-            options = listOf("São Paulo", "Rio de Janeiro", "Minas Gerais"),
-            modifier = Modifier
-                .fillMaxWidth(0.9f)
-                .padding(horizontal = 16.dp),
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        DropdownMenuField(
-            value = selectedCidade,
-            onValueChange = { selectedCidade = it },
-            label = { Text("Cidade") },
-            options = listOf("São Paulo", "Rio de Janeiro", "Belo Horizonte"),
-            modifier = Modifier
-                .fillMaxWidth(0.9f)
-                .padding(horizontal = 16.dp),
-        )
-        Spacer(modifier = Modifier.height(32.dp)) // Aumentamos o espaçamento aqui
-
+        Spacer(modifier = Modifier.height(32.dp))
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -109,7 +101,7 @@ fun LocationScreen() {
             }
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Página 2/xx",
+                text = "Página 7/xx",
                 fontSize = 12.sp,
                 color = Color.Gray,
                 modifier = Modifier.padding(top = 8.dp),
@@ -121,58 +113,6 @@ fun LocationScreen() {
                 contentDescription = "DB1 Logo",
                 modifier = Modifier.size(64.dp)
             )
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun DropdownMenuField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    label: @Composable () -> Unit,
-    options: List<String>,
-    modifier: Modifier = Modifier,
-) {
-    var expanded by remember { mutableStateOf(false) }
-
-    ExposedDropdownMenuBox(
-        expanded = expanded,
-        onExpandedChange = { expanded = !expanded },
-        modifier = modifier
-    ) {
-        OutlinedTextField(
-            value = value,
-            onValueChange = onValueChange,
-            label = label,
-            modifier = Modifier
-                .menuAnchor()
-                .fillMaxWidth(),
-            trailingIcon = {
-                ExposedDropdownMenuDefaults.TrailingIcon(
-                    expanded = expanded
-                )
-            },
-            readOnly = true,
-            shape = RoundedCornerShape(8.dp),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                focusedBorderColor = Color.Black,
-                unfocusedBorderColor = Color.Black
-            )
-        )
-        ExposedDropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
-        ) {
-            options.forEach { option ->
-                DropdownMenuItem(
-                    text = { Text(text = option) },
-                    onClick = {
-                        onValueChange(option)
-                        expanded = false
-                    }
-                )
-            }
         }
     }
 }
