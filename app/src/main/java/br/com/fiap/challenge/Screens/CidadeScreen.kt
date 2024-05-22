@@ -1,4 +1,4 @@
-/*package br.com.fiap.challenge.Screens
+package br.com.fiap.challenge.Screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,8 +21,8 @@ import androidx.navigation.NavHostController
 import br.com.fiap.challenge.viewmodel.UserProfileViewModel
 
 @Composable
-fun SoftScreen(navController: NavHostController, userProfileViewModel: UserProfileViewModel = viewModel()) {
-    var softSkills by remember { mutableStateOf(TextFieldValue("")) }
+fun CidadeScreen(navController: NavHostController, userProfileViewModel: UserProfileViewModel = viewModel()) {
+    var cidade by remember { mutableStateOf(TextFieldValue("")) }
     val userProfile = userProfileViewModel.userProfile.observeAsState()
 
     Column(
@@ -31,14 +31,13 @@ fun SoftScreen(navController: NavHostController, userProfileViewModel: UserProfi
             .padding(16.dp)
     ) {
         TextField(
-            value = softSkills,
+            value = cidade,
             onValueChange = { userProfileViewModel.updateName(it.toString()) },
-            label = { Text("Soft Skills:") }
+            label = { Text("Cidade") }
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "Soft Skills: $softSkills")
+        Text(text = "Cidade: $cidade")
     }
 }
 
 
-*/

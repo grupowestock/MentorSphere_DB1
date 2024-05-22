@@ -1,4 +1,4 @@
-/*package br.com.fiap.challenge.Screens
+package br.com.fiap.challenge.Screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,12 +18,13 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import br.com.fiap.challenge.data.UserProfile
 import br.com.fiap.challenge.viewmodel.UserProfileViewModel
 
 @Composable
-fun SoftScreen(navController: NavHostController, userProfileViewModel: UserProfileViewModel = viewModel()) {
-    var softSkills by remember { mutableStateOf(TextFieldValue("")) }
-    val userProfile = userProfileViewModel.userProfile.observeAsState()
+fun NivelScreen(navController: NavHostController, userProfileViewModel: UserProfileViewModel = viewModel()) {
+    val userProfile by userProfileViewModel.userProfile.observeAsState(UserProfile())
+    var nivelIdioma by remember { mutableStateOf(TextFieldValue(userProfile.nome)) }
 
     Column(
         modifier = Modifier
@@ -31,14 +32,11 @@ fun SoftScreen(navController: NavHostController, userProfileViewModel: UserProfi
             .padding(16.dp)
     ) {
         TextField(
-            value = softSkills,
+            value = nivelIdioma,
             onValueChange = { userProfileViewModel.updateName(it.toString()) },
-            label = { Text("Soft Skills:") }
+            label = { Text("Nível") }
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "Soft Skills: $softSkills")
+        Text(text = "Nível do idioma: $nivelIdioma")
     }
 }
-
-
-*/
