@@ -17,7 +17,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -97,15 +96,7 @@ fun UserScreen(navController: NavHostController, userProfileViewModel: UserProfi
             Image(painter = painterResource(id = R.drawable.ic_galeria), contentDescription = "Upload picture", modifier = Modifier.size(50.dp))
             Text("Usar da galeria", color = Color.Black, fontSize = 16.sp)
         }
-        Spacer(modifier = Modifier.height(16.dp))
-//        TextField(
-//            value = foto,
-//            onValueChange = {
-//                foto = it
-//                userProfileViewModel.updateName(it.text)
-//            },
-//            label = { Text("Foto de perfil") }
-//        )
+
         Spacer(modifier = Modifier.height(16.dp))
         Text(text = "Foto de perfil: ${foto.text}")
         Spacer(modifier = Modifier.height(32.dp))

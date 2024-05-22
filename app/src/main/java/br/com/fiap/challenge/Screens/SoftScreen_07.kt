@@ -59,6 +59,7 @@ fun SoftScreen(navController: NavHostController, userProfileViewModel: UserProfi
             .padding(16.dp)
             .verticalScroll(rememberScrollState())
     ) {
+        // Input para o certificado
         TextField(
             value = certificados,
             onValueChange = {
@@ -73,6 +74,7 @@ fun SoftScreen(navController: NavHostController, userProfileViewModel: UserProfi
 
         Spacer(modifier = Modifier.height(32.dp))
 
+        // Input para as informações da certificação
         TextField(
             value = certificationName,
             onValueChange = { certificationName = it },
@@ -100,6 +102,8 @@ fun SoftScreen(navController: NavHostController, userProfileViewModel: UserProfi
                 modifier = Modifier.weight(1f)
             )
         }
+
+        // Botão para adicionar a certificação
         Button(
             onClick = {
                 if (certificationName.isNotBlank() && issuingOrganization.isNotBlank()) {
@@ -115,6 +119,8 @@ fun SoftScreen(navController: NavHostController, userProfileViewModel: UserProfi
         ) {
             Text("Adicionar")
         }
+
+        // Exibir as certificações
         Spacer(modifier = Modifier.height(16.dp))
         userProfile?.certifications?.forEach { certification ->
             MiniCard(content = "${certification.name} - ${certification.organization}", onDelete = {
@@ -124,7 +130,7 @@ fun SoftScreen(navController: NavHostController, userProfileViewModel: UserProfi
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        // Navigation buttons
+        // Botões de navegação
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.fillMaxWidth()
